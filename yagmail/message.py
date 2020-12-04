@@ -208,8 +208,9 @@ def get_mime_object(is_marked_up, content_string, encoding):
             content_object["main_type"] = "application"
             content_object["sub_type"] = "octet-stream"
 
+    name = (encoding, '', content_name) if not content_object["main_type"] == 'image' else content_name
     mime_object = MIMEBase(
-        content_object["main_type"], content_object["sub_type"], name=(encoding, '', content_name)
+        content_object["main_type"], content_object["sub_type"], name=name
     )
     mime_object.set_payload(content)
     if content_object["main_type"] == "application":
